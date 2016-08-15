@@ -105,9 +105,9 @@
 
     /*
     This is a list of all available events you can register on a dropzone object.
-    
+
     You can register an event handler like this:
-    
+
         dropzone.on("dragEnter", function() { });
      */
 
@@ -464,7 +464,8 @@
           this.clickableElements = Dropzone.getElements(this.options.clickable, "clickable");
         }
       }
-      this.init();
+
+      this.init(this.options.myoption);
     }
 
     Dropzone.prototype.getAcceptedFiles = function() {
@@ -532,6 +533,7 @@
     };
 
     Dropzone.prototype.init = function() {
+      var myoption = arguments[0];
       var eventName, noPropagation, setupHiddenFileInput, _i, _len, _ref, _ref1;
       if (this.element.tagName === "form") {
         this.element.setAttribute("enctype", "multipart/form-data");
@@ -669,6 +671,7 @@
             element: clickableElement,
             events: {
               "click": function(evt) {
+                if(myoption())
                 if ((clickableElement !== _this.element) || (evt.target === _this.element || Dropzone.elementInside(evt.target, _this.element.querySelector(".dz-message")))) {
                   _this.hiddenFileInput.click();
                 }
@@ -1655,7 +1658,7 @@
 
 
   /*
-  
+
   Bugfix for iOS 6 and 7
   Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   based on the work of https://github.com/stomita/ios-imagefile-megapixel
